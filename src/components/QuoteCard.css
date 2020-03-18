@@ -3,13 +3,65 @@
   min-height: 200px;
   background-color: #ffffff;
   border-radius: 4px;
-  transition: all 3s;
+  display: flex;
+  flex-direction: column;
+  
+}
+
+p {
+  display: inline;
+  margin-left: 10px;
+}
+
+.btn-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 50px;
+  margin-bottom: 20px;
+}
+
+.social {
+  padding: 0 30px;
+  margin: 0;
+}
+
+.btn {
+  display: inline-block;
+  color: #fff;
+  text-align: center;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: all 2s;
+}
+
+.soc-button {
+  font-size: 25px;
+  margin: 0 3px;
+  width: 45px;
+}
+
+#new-quote {
+  height: 65%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 10px;
+  width: 85px;
+  margin-right: 30px;
 }
 
 #text {
   font-size: 30px;
+  padding: 30px;
+  text-align: center;
+  margin-bottom: 5px;
+  transition: all 3s;
 }
 
 #author{
-  
+  font-size: 13px;
+  text-align: right;
+  padding-right: 30px;
+  margin-bottom: 20px;
 }

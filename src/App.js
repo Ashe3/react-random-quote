@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useCallback } from "react";
 import "./App.css";
 import "font-awesome/css/font-awesome.min.css";
 
@@ -6,8 +6,10 @@ import QuoteCard from "./components/QuoteCard";
 
 const App = () => {
   const [quote, setQuote] = useState({quote: '', author: ''});
-  
-  useEffect(() => {
+  const [visibility, setVisibility] = useState(true);
+  const [color, setColor] = useState(Array.from({ length: 3 }).map(_ =>Math.floor(Math.random() * 255)))
+
+  const loadData = () => {
     fetch(
       "https://andruxnet-random-famous-quotes.p.rapidapi.com/?cat=famous&count=1",
       {
@@ -19,22 +21,44 @@ const App = () => {
       }
     )
       .then(response => response.json())
-      .then(response => setQuote(response[0]))
+      .then(response => {
+        setQuote(response[0]);
+        setTimeout(() => {
+          setVisibility(true);
+        }, 200)
+      })
       .catch(err => {
         console.log(err);
       });
+  }
+  
+
+  
+  useEffect(() => {
+    loadData();
+    return setQuote({quote: '', author: ''})
   }, []);
 
-  const color = Array.from({ length: 3 }).map(_ =>
-    Math.floor(Math.random() * 255)
-  );
+  const handleClick = () => { 
+    setTimeout(() => {
+      setQuote({quote: '', author: ''});
+    }, 400);
+    loadData();
+    setColor(color.map(_ => Math.floor(Math.random() * 255)));
+  }
+
   const colorStyle = {
     backgroundColor: `rgb(${color})`
   };
 
   return (
     <div id="quote-box" className="fully" style={colorStyle}>
-      <QuoteCard color={color} quote={quote}/>
+      <QuoteCard
+        visible={visibility}
+        color={color} 
+        quote={quote} 
+        onClick={handleClick}/
+      >
     </div>
   );
 };
